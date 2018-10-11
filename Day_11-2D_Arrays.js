@@ -1,21 +1,47 @@
-function main() {
-  var arr = [];
-  for (arr_i = 0; arr_i < 6; arr_i++) {
-    arr[arr_i] = readLine().split(' ');
-    arr[arr_i] = arr[arr_i].map(Number);
+/* Objective
+Today,
+we 're building on our knowledge of Arrays by adding another dimension. Check out the Tutorial tab for learning materials and an instructional video!
+
+Context
+Given a 2 D Array, : 1 1 1 0 0 0
+0 1 0 0 0 0
+1 1 1 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+We define an hourglass in to be a subset of values with indices falling in this pattern in 's graphical representation:
+
+a b c
+d
+e f g
+There are hourglasses in,
+and an hourglass sum is the sum of an hourglass ' values.
+
+Task
+Calculate the hourglass sum for every hourglass in, then print the maximum hourglass sum.Input Format There are lines of input, where each line contains space - separated integers describing 2 D Array; every value in will be in the inclusive range of to.Constraints Output Format Print the largest(maximum)hourglass sum found in.Sample Input 1 1 1 0 0 0 0 1 0 0 0 0 1 1 1 0 0 0 0 0 2 4 4 0 0 0 0 2 0 0 0 0 1 2 4 0 Sample Output 19 Explanation contains the following hourglasses : 1 1 1 1 1 0 1 0 0 0 0 0 1 0 0 0 1 1 1 1 1 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 2 0 2 4 2 4 4 4 4 0 1 1 1 1 1 0 1 0 0 0 0 0 0 2 4 4 0 0 0 0 0 2 0 2 0 2 0 0 0 0 2 0 2 4 2 4 4 4 4 0 0 0 2 0 0 0 1 0 1 2 1 2 4 2 4 0 The hourglass with the maximum sum()is : 2 4 4 2 1 2 4 */
+============================================================================== function main() {
+  let arr = Array(6);
+
+  for (let i = 0; i < 6; i++) {
+    arr[i] = readLine().split(' ').map(arrTemp => parseInt(arrTemp, 10));
+
   }
-
   var sumArray = [];
-  for (i = 0; i < arr.length; i++) {
-
-    for (j = 0; j < arr[i].length; j++) {
-      var singleSum = 0;
-      if (arr[i] && arr[i + 1] && arr[i + 2]) {
-        if (arr[i][j + 1] != undefined && arr[i][j + 2] != undefined) {
-          sumArray.push(arr[i][j] + arr[i][j+1] + arr[i][j+2] + arr[i+1][j+1] + arr[i+2][j] + arr[i+2][j+1] + arr[i+2][j+2])
-        }
-      }
+  var h = 0;
+  for (var i = 0; i < (arr.length - 2); i++) {
+    for (var j = 0; j < (arr.length - 2); j++) {
+      sumArray[h] = arr[i][j] + arr[i][j + 1] + arr[i][j + 2] + arr[i + 1][j + 1] + arr[i + 2][j] + arr[i + 2][j + 1] + arr[i + 2][j + 2];
+      h++;
     }
   }
-  console.log(Math.max.apply(null, sumArray));
+
+  sumArray.sort();
+
+  var max = -99999;
+  for (var x = 0; x < 16; x++) {
+    if (sumArray[x] > max) 
+      max = sumArray[x];
+    }
+  
+  console.log(max);
 }
