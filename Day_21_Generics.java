@@ -18,3 +18,9 @@
 // Your printArray function should print each element of its generic array parameter on a new line.
 
 ==============================================================================
+
+public static <E> void printArray(E[] generic){
+    for(E element : generic) {
+        System.out.println(element);
+    }
+}
